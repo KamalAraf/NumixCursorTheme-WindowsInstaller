@@ -1,0 +1,14 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# distribution archives
+*.zip
+*.tar.gz
+
+# editor artifacts
+.vscode/
+.idea/
+*.swp
+*~

@@ -1,0 +1,180 @@
+NumixCursorTheme-WindowsInstaller — Installer Wrapper License
+Copyright (c) 2026 KamalAraf
+
+---
+
+IMPORTANT: This License applies exclusively to the installer wrapper
+(install.inf, uninstall.bat, project structure and documentation) contained
+in this repository. The cursor artwork files (*.cur, *.ani) are NOT covered
+by this License and remain under the GNU General Public License v3.0 as
+originally published by the Numix Project.
+
+---
+
+                     INSTALLER WRAPPER LICENSE
+             Inspired by the structure of the GNU GPL v3
+                           Version 1.0
+
+                            Preamble
+
+  This License governs the installer wrapper and packaging of the
+NumixCursorTheme-WindowsInstaller project. The purpose of this wrapper
+is to simplify installation of the Numix cursor theme on Windows without
+requiring additional dependencies. Because the cursor artwork is a
+copyleft work under GPL-3.0, this License is designed to be compatible
+with it while adding specific restrictions on the wrapper itself.
+
+  The wrapper is provided free of charge and may be freely used and
+shared. However, unlike the GPL, this License prohibits commercial
+exploitation of the wrapper, in order to ensure it remains a free and
+open utility for all users.
+
+  The cursor files bundled herein remain the property of the Numix
+Project and are governed exclusively by the GPL-3.0.
+
+---
+
+                      TERMS AND CONDITIONS
+
+  0. Definitions.
+
+  "This License" refers to Version 1.0 of the Installer Wrapper License
+as defined in this document. This License is fixed at Version 1.0 and
+does not permit the substitution of any later version.
+
+  "The Work" refers to the installer wrapper: the install.inf file,
+uninstall.bat script, project structure, documentation, and any other
+packaging scripts contained in this repository, explicitly excluding the
+cursor artwork files.
+
+  "The Cursors" refers to all *.cur and *.ani files included in the
+src/cursors/ directory. These are governed by the GPL-3.0 and are not
+subject to This License.
+
+  "You" (or "Your") means an individual or legal entity exercising
+permissions granted by This License.
+
+  "Modified Version" means any work derived from or based on the Work
+in a way requiring copyright permission.
+
+  "Commercial Use" means any use of the Work, in whole or in part,
+that is primarily intended for or directed toward commercial advantage
+or monetary compensation. This includes, but is not limited to:
+selling the Work, bundling it into a commercial product or service,
+incorporating it into a paid offering, or using it as part of a
+monetized distribution channel. Incidental mention of the Work in
+non-commercial content (such as tutorials, reviews, or educational
+material) does not constitute Commercial Use.
+
+  1. Source Code.
+
+  The Work is provided in its entirety in human-readable form. There is
+no distinction between source and object form for this Work.
+
+  2. Basic Permissions.
+
+  Subject to the conditions of This License, You are granted a worldwide,
+royalty-free, non-exclusive, non-sublicensable license to:
+
+    a) Use the Work for personal, educational, or internal purposes;
+
+    b) Copy and distribute verbatim copies of the Work, provided that
+    You preserve This License in full on all copies;
+
+    c) Modify the Work and distribute Modified Versions under the terms
+    of This License, provided that You meet all conditions in Section 4.
+
+  3. Non-Commercial Restriction.
+
+  Notwithstanding any other provision of This License, the following
+restriction applies and supersedes the permissions granted in Section 2:
+
+  You may NOT engage in Commercial Use of the Work. This restriction
+applies to the Work as defined in Section 0 and does not apply to
+The Cursors, which remain freely usable under the terms of the GPL-3.0.
+
+  4. Conditions for Distribution of Modified Versions.
+
+  You may distribute Modified Versions of the Work provided that:
+
+    a) You include a prominent notice stating that You modified the Work
+    and the date of modification;
+
+    b) You retain This License in full, unmodified, in all distributed
+    copies;
+
+    c) You include a clear and visible reference to the original projects:
+       https://github.com/numixproject/numix-cursor-theme
+       https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller
+
+    d) You do not represent the Work or any Modified Version as your
+    original creation, and you do not remove or obscure credits to the
+    Numix Project for the cursor artwork.
+
+  5. Cursor Artwork — GPL-3.0.
+
+  The Cursors (*.cur, *.ani) are the intellectual property of the Numix
+Project. They are distributed under the GNU General Public License
+version 3.0 (GPL-3.0), the full text of which is available at:
+
+    https://www.gnu.org/licenses/gpl-3.0.html
+
+  Nothing in This License modifies, overrides, or supersedes the rights
+and obligations established by the GPL-3.0 with respect to The Cursors.
+In the event of any conflict between This License and the GPL-3.0 as
+applied to The Cursors, the GPL-3.0 shall prevail.
+
+  6. No Sublicensing.
+
+  You may not sublicense the Work. Each recipient of the Work or a
+Modified Version automatically receives a license directly from the
+original Licensor under the terms of This License. You may not impose
+any further restrictions on the recipients' exercise of the rights
+granted herein.
+
+  7. Protecting Users' Freedom.
+
+  You may not distribute the Work in a manner that uses technological
+measures to restrict recipients from exercising the rights granted by
+This License.
+
+  8. Disclaimer of Warranties.
+
+  THERE IS NO WARRANTY FOR THE WORK, TO THE EXTENT PERMITTED BY
+APPLICABLE LAW. THE WORK IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+NON-INFRINGEMENT. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF
+THE WORK IS WITH YOU.
+
+  9. Limitation of Liability.
+
+  IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY DAMAGES, INCLUDING
+ANY GENERAL, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
+OF THE USE OR INABILITY TO USE THE WORK, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+
+  10. Termination.
+
+  This License and the rights granted hereunder terminate automatically
+if You fail to comply with any of its terms. Upon termination, You must
+cease all use, reproduction, and distribution of the Work.
+
+  Termination does not affect the licenses of parties who have received
+copies from You in compliance with This License prior to termination.
+
+---
+
+                      END OF TERMS AND CONDITIONS
+
+For licensing questions or commercial use inquiries, contact the project
+maintainer via the repository listed below.
+
+  Original cursor artwork:
+    Copyright (C) Numix Project — https://github.com/numixproject
+    Licensed under the GNU General Public License v3.0
+
+  Installer wrapper:
+    Copyright (C) 2026 KamalAraf
+    https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller
+    Licensed under the Installer Wrapper License, Version 1.0
