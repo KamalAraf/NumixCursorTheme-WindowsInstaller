@@ -1,10 +1,10 @@
 # NumixCursorTheme-WindowsInstaller (v1.0)
 
-![Preview](assets/preview.png)
-
 ![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)
 ![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)
 ![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)
+
+![Preview](assets/preview.png)
 
 > A dependency-free Windows installer for the Numix cursor theme.
 
