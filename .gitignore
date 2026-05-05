@@ -3,12 +3,18 @@
 Thumbs.db
 desktop.ini
 
-# distribution archives
+# distribution archives (released on GitHub)
 *.zip
 *.tar.gz
+*.7z
 
 # editor artifacts
 .vscode/
 .idea/
 *.swp
 *~
+
+# build artifacts (source code only in repo)
+src/*.exe
+src/*.pdb
+src/*.config

@@ -1,54 +1,89 @@
-# NumixCursorTheme-WindowsInstaller (v1.0)
+# NumixCursorTheme-WindowsInstaller (v1.1)
 
-![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)
-![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)
-![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)
+[![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
+[![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
+[![Version](https://img.shields.io/badge/version-1.1-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
-![Preview](assets/preview.png)
+[![Preview](assets/preview.png)](assets/preview.png)
 
 > A dependency-free Windows installer for the Numix cursor theme.
 
 This project is a **Windows-native port** of the original [numix-cursor-theme](https://github.com/numixproject/numix-cursor-theme) by the [Numix Project](https://github.com/numixproject).  
-The original repository provides Linux-first tooling and requires additional dependencies to install the theme on Windows. This project eliminates that friction by packaging all cursor files alongside a standard Windows `.inf` installer — no extra software required.
+The original repository provides Linux-first tooling and requires additional dependencies to install the theme on Windows. This project eliminates that friction by packaging all cursor files alongside a native C# application — no extra software required.
 
 ---
 
 ## What's included
 
-- **109 cursor files** (`.cur` and `.ani`) covering the full Numix Dark cursor set
-- **`install.inf`** — a native Windows Setup Information file that registers the theme and copies all files to the correct system directory automatically
-- **`uninstall.bat`** — a one-click uninstaller that removes the theme from the system cleanly
+* **101 static cursor files** (`.cur`) covering the Numix Dark cursor set
+* **8 animated cursor files** (`.ani`) for dynamic effects (busy, working, etc.)
+* **`NumixCursorsManager.exe`** — a native Windows application with GUI that handles installation, uninstallation, and cursor management
+* **`logo.ico`** — custom app icon (stored in `assets/`)
+* **Source code** — C# source files (`Program.cs`, `MainForm.cs`) for transparency and customization
+
+---
+
+## Screenshots
+
+### Application Interface
+[![App Preview](assets/preview2.png)](assets/preview2.png)
 
 ---
 
 ## Installation
 
-### Install
+### Quick Start (Recommended)
 
-1. Download or clone this repository
+> The release ZIP already includes the precompiled `NumixCursorsManager.exe` — no build step required.
+
+1. Download the latest release ZIP from the [Releases](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases) page
+2. Extract the ZIP file (ensure `NumixCursorsManager.exe` is in the same folder as the `cursors/` directory)
+3. Right-click `NumixCursorsManager.exe` → **Run as administrator**
+4. Select **"Install Numix Dark"**
+5. (Optional) Check **"Set as active cursor immediately"** to apply the theme right away
+6. Click **Apply**
+
+### Build from Source
+
+1. Clone or download this repository
 2. Open the `src/` folder
-3. Right-click `install.inf` → **Install**
-4. Open **Mouse Properties** (`Win + R` → `main.cpl` → `Enter`)
-5. Go to the **Pointers** tab → select **Numix-Dark** from the scheme dropdown
-6. Click **Apply** → **OK**
+3. Compile using the .NET Framework C# compiler (preinstalled on Windows):
+   ```powershell
+   C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe `
+     /out:NumixCursorsManager.exe `
+     /target:winexe `
+     /reference:System.Windows.Forms.dll `
+     /reference:System.Drawing.dll `
+     /win32manifest:"app.manifest" `
+     "/win32icon:..\assets\logo.ico" `
+     Program.cs MainForm.cs
+   ```
+4. The compiled `NumixCursorsManager.exe` will appear in the `src/` folder
 
-### Uninstall
+---
 
-> **Note:** Before running the uninstaller, open *Mouse Properties* and switch to a different cursor scheme. If Numix-Dark is still active when it is removed, your cursor may appear broken until the next reboot.
+## Usage
 
-1. Right-click `uninstall.bat` in the `src/` folder → **Run as administrator**
-2. Follow the on-screen prompt to confirm you have switched cursor scheme
-3. The script will remove the registry entry and delete `C:\Windows\Cursors\Numix-Dark\` automatically
+The **Numix Cursors Manager** provides a simple interface with four options:
+
+* **Install Numix Dark** — Copies static and animated cursor files to the system directory and registers the theme.
+* **Set Numix Dark (Activate Theme)** — Activates the theme if already installed, without reinstalling.
+* **Uninstall Numix Dark** — Removes the theme and all cursor files. Automatically restores the Windows default cursor if Numix is currently active.
+* **Restore Windows Default** — Resets the cursor theme to Windows default. Skips the operation if the default is already active.
+
+**Options:**
+* **Set as active cursor immediately** (checkbox) — *Available during installation only.* When checked, applies the theme instantly after copying files. Uncheck to install without changing the active cursor.
 
 ---
 
 ## Compatibility
 
-| Windows Version | Status      |
-|----------------|-------------|
-| Windows 11     | Supported   |
-| Windows 10     | Supported   |
-| Windows 7 / 8  | Untested    |
+| Windows Version | Status |
+| --- | --- |
+| Windows 11 | Supported |
+| Windows 10 | Supported |
+| Windows 7 / 8 | Untested |
 
 > **Windows 11 Note:** The *Location Select* and *Person Select* cursor slots introduced in Windows 11 cannot be themed through the standard cursor scheme mechanism and will remain as Windows defaults. All other cursor slots are fully supported.
 
@@ -62,13 +97,34 @@ NumixCursorTheme-WindowsInstaller/
 │   ├── cursors/
 │   │   ├── static/        # Static cursor files (.cur)
 │   │   └── animated/      # Animated cursor files (.ani)
-│   ├── install.inf        # Windows installer definition
-│   └── uninstall.bat      # One-click uninstaller (run as administrator)
+│   ├── Program.cs         # Application entry point
+│   ├── MainForm.cs        # Main application logic and GUI
+│   └── app.manifest       # UAC manifest (requires administrator)
 ├── assets/
-│   └── preview.png        # Preview image for the README
+│   ├── logo.png           # Project logo
+│   ├── logo.ico           # App icon — exe, taskbar, and form title bar
+│   ├── preview.png        # Preview image for the README
+│   ├── preview2.png       # App interface screenshot
+│   └── social_preview.png # Social preview image
 ├── LICENSE
 └── README.md
 ```
+
+---
+
+## Changelog
+
+### v1.1
+* Replaced `.inf` + `uninstall.bat` with a native C# Windows Forms application (`NumixCursorsManager.exe`)
+* Added GUI with four operations: Install, Uninstall, Set Active, Restore Default
+* Added automatic UAC elevation via `app.manifest` — no manual "Run as administrator" required
+* Added instant cursor application via `SystemParametersInfo` — no reboot or logout required
+* Added detection of already-installed or already-active state before each operation
+* Upscaled all cursor files to 256×256 with HiDPI sizes (32, 48, 64, 96, 128, 256 px) for crisp rendering on high-resolution displays
+
+### v1.0
+* Initial release — `.inf`-based installer with `uninstall.bat`
+* Bundled 101 static and 8 animated Numix Dark cursor files
 
 ---
 
@@ -76,14 +132,14 @@ NumixCursorTheme-WindowsInstaller/
 
 All cursor artwork is part of the **Numix cursor theme**, originally created by the [Numix Project](https://github.com/numixproject) and distributed under the GPL-3.0 license.
 
-This installer wrapper is a convenience repackaging for Windows users. No artwork was modified.
+This installer wrapper is a convenience repackaging for Windows users. Cursor files have been repackaged for Windows compatibility and upscaled to include HiDPI sizes (up to 256×256 px); the visual artwork has not been altered.
 
-- Original project: https://github.com/numixproject/numix-cursor-theme
-- Numix Project: https://github.com/numixproject
+* Original project: <https://github.com/numixproject/numix-cursor-theme>
+* Numix Project: <https://github.com/numixproject>
 
 ---
 
 ## License
 
-The **installer wrapper** (`install.inf`, `uninstall.bat`, project structure, and documentation) is licensed under the [Installer Wrapper License](./LICENSE).  
+The **installer wrapper** (C# source code, manifest, project structure, and documentation) is licensed under the [Installer Wrapper License](./LICENSE).  
 The **cursor assets** (`.cur`, `.ani`) retain their original [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) license from the Numix Project.

@@ -4,8 +4,8 @@ Copyright (c) 2026 KamalAraf
 ---
 
 IMPORTANT: This License applies exclusively to the installer wrapper
-(install.inf, uninstall.bat, project structure and documentation) contained
-in this repository. The cursor artwork files (*.cur, *.ani) are NOT covered
+(Program.cs, MainForm.cs, app.manifest, project structure and documentation)
+contained in this repository. The cursor artwork files (*.cur, *.ani) are NOT covered
 by this License and remain under the GNU General Public License v3.0 as
 originally published by the Numix Project.
 
@@ -42,10 +42,10 @@ Project and are governed exclusively by the GPL-3.0.
 as defined in this document. This License is fixed at Version 1.0 and
 does not permit the substitution of any later version.
 
-  "The Work" refers to the installer wrapper: the install.inf file,
-uninstall.bat script, project structure, documentation, and any other
-packaging scripts contained in this repository, explicitly excluding the
-cursor artwork files.
+  "The Work" refers to the installer wrapper: the C# source code
+(Program.cs, MainForm.cs), the application manifest (app.manifest),
+project structure, documentation, and any other packaging scripts
+contained in this repository, explicitly excluding the cursor artwork files.
 
   "The Cursors" refers to all *.cur and *.ani files included in the
 src/cursors/ directory. These are governed by the GPL-3.0 and are not
@@ -68,8 +68,8 @@ material) does not constitute Commercial Use.
 
   1. Source Code.
 
-  The Work is provided in its entirety in human-readable form. There is
-no distinction between source and object form for this Work.
+  The Work is provided in its entirety in human-readable form (C# source).
+There is no distinction between source and object form for this Work.
 
   2. Basic Permissions.
 
