@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.1)
+# NumixCursorTheme-WindowsInstaller (v1.1.1)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.1-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.1.1-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -16,7 +16,7 @@ The original repository provides Linux-first tooling and requires additional dep
 
 ## What's included
 
-* **101 static cursor files** (`.cur`) covering the Numix Dark cursor set
+* **86 static cursor files** (`.cur`) covering the Numix Dark cursor set
 * **8 animated cursor files** (`.ani`) for dynamic effects (busy, working, etc.)
 * **`NumixCursorsManager.exe`** — a native Windows application with GUI that handles installation, uninstallation, and cursor management
 * **`logo.ico`** — custom app icon (stored in `assets/`)
@@ -113,6 +113,10 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.1.1
+* Removed 15 Linux-only cursor files unused on Windows (X11/Wayland aliases) — reduced static cursor count from 101 to 86
+* Fixed icon handle leak in `LoadAppIcon()` — now uses `using` + `Clone()` to release the file stream immediately after load
 
 ### v1.1
 * Replaced `.inf` + `uninstall.bat` with a native C# Windows Forms application (`NumixCursorsManager.exe`)

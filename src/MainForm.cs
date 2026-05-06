@@ -67,9 +67,12 @@ namespace NumixCursorsManager
 
                 string iconPath = Path.Combine(exeDir, "..", "assets", "logo.ico");
                 if (File.Exists(iconPath))
-                    this.Icon = new Icon(iconPath);
+                {
+                    using (var icon = new Icon(iconPath))
+                    this.Icon = (Icon)icon.Clone();
+                }
             }
-            catch { /* Fallback to default icon */ }
+            catch { /* default icon */ }
         }
 
         private void InitializeComponent()
