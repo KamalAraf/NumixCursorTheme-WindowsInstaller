@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.1.1)
+# NumixCursorTheme-WindowsInstaller (v1.1.2)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.1.1-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.1.2-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -16,8 +16,8 @@ The original repository provides Linux-first tooling and requires additional dep
 
 ## What's included
 
-* **86 static cursor files** (`.cur`) covering the Numix Dark cursor set
-* **8 animated cursor files** (`.ani`) for dynamic effects (busy, working, etc.)
+* **13 static cursor files** (`.cur`) covering the full Numix Dark cursor set for Windows
+* **2 animated cursor files** (`.ani`) for busy and working states
 * **`NumixCursorsManager.exe`** — a native Windows application with GUI that handles installation, uninstallation, and cursor management
 * **`logo.ico`** — custom app icon (stored in `assets/`)
 * **Source code** — C# source files (`Program.cs`, `MainForm.cs`) for transparency and customization
@@ -113,6 +113,13 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.1.2
+* Fixed cursor hotspots shifted on all 13 static cursor files — hotspot values were being scaled proportionally during HiDPI upscaling instead of being set to their correct positions (arrow tip, center, hand tip, etc.). All 78 hotspot entries across 6 sizes per file have been corrected
+* Fixed `ResetUI()` not resetting the status label — in some early-return paths (e.g. clicking "No" on a confirmation dialog) the label would remain stuck on "Processing..."
+* Fixed `SystemParametersInfo` return value never being checked — if the call failed silently, the app would show "Operation completed successfully" while the cursor remained unchanged. It now throws with a descriptive message
+* Removed 88 unused static cursor files (Linux/X11 aliases not referenced by the installer) and 6 duplicate animated cursor files — reduced cursor count from 101 static + 8 animated to 13 static + 2 animated
+* Renamed `SPIF_UPDATE` constant to the correct `SPIF_UPDATEINIFILE | SPIF_SENDCHANGE` for clarity
 
 ### v1.1.1
 * Removed 15 Linux-only cursor files unused on Windows (X11/Wayland aliases) — reduced static cursor count from 101 to 86

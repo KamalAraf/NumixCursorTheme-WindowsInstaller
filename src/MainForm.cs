@@ -12,8 +12,9 @@ namespace NumixCursorsManager
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool SystemParametersInfo(uint uiAction, uint uiParam, IntPtr pvParam, uint fWinIni);
 
-        private const uint SPI_SETCURSORS = 0x0057;
-        private const uint SPIF_UPDATE = 0x03;
+        private const uint SPI_SETCURSORS     = 0x0057;
+        private const uint SPIF_UPDATEINIFILE = 0x01;
+        private const uint SPIF_SENDCHANGE    = 0x02;
 
         private const string SCHEME_NAME = "Numix-Dark";
         private const string INSTALL_DIR = @"C:\Windows\Cursors\Numix-Dark";
@@ -219,6 +220,7 @@ namespace NumixCursorsManager
         {
             btnApply.Enabled = true;
             UseWaitCursor    = false;
+            lblStatus.Text   = "Ready.";
         }
 
         private bool IsDefaultActive()
@@ -291,7 +293,8 @@ namespace NumixCursorsManager
                 key.SetValue("UpArrow",     DefUpArrow);
                 key.SetValue("Hand",        DefHand);
             }
-            SystemParametersInfo(SPI_SETCURSORS, 0, IntPtr.Zero, SPIF_UPDATE);
+            if (!SystemParametersInfo(SPI_SETCURSORS, 0, IntPtr.Zero, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE))
+                throw new Exception("Cursor theme was applied to the registry but could not be activated immediately. Changes will take effect after restarting Explorer.");
         }
 
         private void SetActiveCursor()
@@ -315,7 +318,8 @@ namespace NumixCursorsManager
                 key.SetValue("UpArrow",     INSTALL_DIR + @"\up-arrow.cur");
                 key.SetValue("Hand",        INSTALL_DIR + @"\pointer.cur");
             }
-            SystemParametersInfo(SPI_SETCURSORS, 0, IntPtr.Zero, SPIF_UPDATE);
+            if (!SystemParametersInfo(SPI_SETCURSORS, 0, IntPtr.Zero, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE))
+                throw new Exception("Cursor theme was applied to the registry but could not be activated immediately. Changes will take effect after restarting Explorer.");
         }
 
         private bool IsNumixActive()
