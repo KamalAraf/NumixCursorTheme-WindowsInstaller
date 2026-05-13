@@ -148,6 +148,9 @@ namespace NumixCursorsManager
                             {
                                 lblStatus.Text = "Installing...";
                                 await System.Threading.Tasks.Task.Run(() => Install(true));
+                                MessageBox.Show("Operation completed successfully.", "Done",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                lblStatus.Text = "Ready.";
                             }
                             return;
                         }
