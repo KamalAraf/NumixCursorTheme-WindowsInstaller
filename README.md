@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.1.2)
+# NumixCursorTheme-WindowsInstaller (v1.1.3)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.1.2-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.1.3-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -113,6 +113,13 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.1.3
+* Fixed hotspot alignment on 5 cursor files (`default`, `help`, `pencil`, `pointer`, `up-arrow`) — hotspot coordinates were misaligned with the actual tip of each cursor image (fix by [SorenINT2000](https://github.com/SorenINT2000))
+* Fixed `INSTALL_DIR` hardcoded to `C:\Windows` — now resolves dynamically, fixing installation on systems where Windows is installed on a drive other than C:
+* Fixed null reference on `CreateSubKey` — added explicit null check with a descriptive error message when the registry key cannot be created
+* Fixed redundant `ResetUI()` calls in early-return paths — the method was being called twice on every early exit due to the `finally` block also calling it
+* Fixed missing success confirmation when installing via the "Set Numix Dark" prompt — the dialog would complete silently without showing "Operation completed successfully"
 
 ### v1.1.2
 * Fixed cursor hotspots shifted on all 13 static cursor files — hotspot values were being scaled proportionally during HiDPI upscaling instead of being set to their correct positions (arrow tip, center, hand tip, etc.). All 78 hotspot entries across 6 sizes per file have been corrected
