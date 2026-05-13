@@ -256,7 +256,11 @@ namespace NumixCursorsManager
             }
 
             using (var key = Registry.CurrentUser.CreateSubKey(SCHEMES_REG))
+            {
+                if (key == null)
+                    throw new Exception("Failed to open or create registry key: " + SCHEMES_REG);
                 key.SetValue(SCHEME_NAME, SchemeValue);
+            }
 
             if (setActive) SetActiveCursor();
         }
