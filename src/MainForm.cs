@@ -17,11 +17,11 @@ namespace NumixCursorsManager
         private const uint SPIF_SENDCHANGE    = 0x02;
 
         private const string SCHEME_NAME = "Numix-Dark";
-        private const string INSTALL_DIR = @"C:\Windows\Cursors\Numix-Dark";
         private const string CURSORS_REG = @"Control Panel\Cursors";
         private const string SCHEMES_REG = @"Control Panel\Cursors\Schemes";
 
         private static readonly string WinRoot = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+        private static readonly string INSTALL_DIR = Path.Combine(WinRoot, "Cursors", "Numix-Dark");
         private static readonly string SchemeValue;
 
         private static readonly string DefArrow      = WinRoot + @"\cursors\aero_arrow.cur";
