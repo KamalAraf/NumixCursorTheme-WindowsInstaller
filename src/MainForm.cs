@@ -123,10 +123,7 @@ namespace NumixCursorsManager
                         if (Directory.Exists(INSTALL_DIR) &&
                             MessageBox.Show("Numix Dark is already installed. Reinstall?", "Confirm",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                        {
-                            ResetUI();
                             return;
-                        }
                         lblStatus.Text = "Installing...";
                         await System.Threading.Tasks.Task.Run(() => Install(cbSetActive.Checked));
                     }
@@ -136,7 +133,6 @@ namespace NumixCursorsManager
                         {
                             MessageBox.Show("Numix Dark is not installed.", "Info",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ResetUI();
                             return;
                         }
                         lblStatus.Text = "Uninstalling...";
@@ -153,7 +149,6 @@ namespace NumixCursorsManager
                                 lblStatus.Text = "Installing...";
                                 await System.Threading.Tasks.Task.Run(() => Install(true));
                             }
-                            ResetUI();
                             return;
                         }
                         lblStatus.Text = "Setting active cursor...";
@@ -165,7 +160,6 @@ namespace NumixCursorsManager
                         {
                             MessageBox.Show("Windows default cursor theme is already active.", "Info",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ResetUI();
                             return;
                         }
                         lblStatus.Text = "Restoring default...";
