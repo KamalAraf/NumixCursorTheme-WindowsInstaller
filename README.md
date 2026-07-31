@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.2.1)
+# NumixCursorTheme-WindowsInstaller (v1.2.2)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.2.1-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.2.2-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -16,14 +16,13 @@ The original repository provides Linux-first tooling and requires additional dep
 
 ## What's included
 
+* **`NumixCursorsManager.exe`** — fully self-contained: all cursor files are embedded inside the exe, so **no ZIP or extra files are needed** to install the theme
 * **Two cursor variants**, each covering the full Numix cursor set for Windows:
   * **Numix Cursor Dark** — white cursors for dark backgrounds
   * **Numix Cursor Light** — dark cursors for light backgrounds
-* **13 static cursor files** (`.cur`) per variant
-* **2 animated cursor files** (`.ani`) per variant for busy and working states
-* **`NumixCursorsManager.exe`** — a native Windows application with GUI that handles installation, uninstallation, and cursor management
+* **13 static cursor files** (`.cur`) per variant, **2 animated cursor files** (`.ani`) per variant
 * **`logo.ico`** — custom app icon (stored in `assets/`)
-* **Source code** — C# source files (`Program.cs`, `MainForm.cs`) for transparency and customization
+* **Source code** — C# source files (`Program.cs`, `MainForm.cs`), build script (`build.bat`), and cursor sources (`src/cursors/`)
 
 ---
 
@@ -38,31 +37,22 @@ The original repository provides Linux-first tooling and requires additional dep
 
 ### Quick Start (Recommended)
 
-> The release ZIP already includes the precompiled `NumixCursorsManager.exe` — no build step required.
+> The release includes the precompiled `NumixCursorsManager.exe` — a single self-contained file. No ZIP, no other files, no build step required.
 
-1. Download the latest release ZIP from the [Releases](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases) page
-2. Extract the ZIP file (ensure `NumixCursorsManager.exe` is in the same folder as the `cursors/` directory)
-3. Right-click `NumixCursorsManager.exe` → **Run as administrator**
-4. Select your preferred **cursor variant**: **Numix Cursor Dark** (for dark backgrounds) or **Numix Cursor Light** (for light backgrounds)
-5. Select **"Install"**
-6. (Optional) Check **"Set as active cursor immediately"** to apply the theme right away
-7. Click **Apply**
+1. Download `NumixCursorsManager.exe` from the [Releases](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases) page
+2. Double-click `NumixCursorsManager.exe` — UAC elevation is automatic
+3. Select your preferred **cursor variant**: **Numix Cursor Dark** (for dark backgrounds) or **Numix Cursor Light** (for light backgrounds)
+4. Select **"Install"**
+5. (Optional) Check **"Set as active cursor immediately"** to apply the theme right away
+6. Click **Apply**
+
+The ZIP attached to the releases is a source-code archive only — it is **not required** to install the theme.
 
 ### Build from Source
 
 1. Clone or download this repository
 2. Open the `src/` folder
-3. Compile using the .NET Framework C# compiler (preinstalled on Windows):
-   ```powershell
-   C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe `
-     /out:NumixCursorsManager.exe `
-     /target:winexe `
-     /reference:System.Windows.Forms.dll `
-     /reference:System.Drawing.dll `
-     /win32manifest:"app.manifest" `
-     "/win32icon:..\assets\logo.ico" `
-     Program.cs MainForm.cs
-   ```
+3. Run `build.bat` — it compiles `NumixCursorsManager.exe` with all 30 cursor files embedded as resources (using the .NET Framework C# compiler, preinstalled on Windows)
 4. The compiled `NumixCursorsManager.exe` will appear in the `src/` folder
 
 ---
@@ -107,6 +97,7 @@ NumixCursorTheme-WindowsInstaller/
 │   │       └── animated/      # Animated cursor files (.ani)
 │   ├── Program.cs             # Application entry point
 │   ├── MainForm.cs            # Main application logic and GUI
+│   ├── build.bat              # Build script (embeds all cursor files into the exe)
 │   └── app.manifest           # UAC manifest (requires administrator)
 ├── assets/
 │   ├── logo.png               # Project logo
@@ -121,6 +112,11 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.2.2
+* Made `NumixCursorsManager.exe` fully self-contained — all 30 cursor files (13 static + 2 animated per variant) are now embedded in the exe as resources and extracted at install time. The exe works standalone: **no ZIP, no `cursors/` folder, no other files required**
+* Added `src/build.bat` — one-click build script that compiles the exe with all embedded resources
+* Release ZIP is now a source-code archive only (optional for installation)
 
 ### v1.2.1
 * Fixed variant detection when uninstalling — `IsNumixActive` matched `Numix-Cursor-Light` files against the `Numix-Cursor` prefix, so uninstalling the dark variant while the light variant was active could restore the Windows default cursor and wipe the active scheme. The check now matches on the full directory path

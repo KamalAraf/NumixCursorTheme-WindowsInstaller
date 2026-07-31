@@ -352,34 +352,28 @@ namespace NumixCursorsManager
 
         private void Install(bool setActive, string cursorDirName, string installDir, string schemeName, string schemeValue)
         {
-            string exeDir = Path.GetDirectoryName(Application.ExecutablePath);
-            if (exeDir == null) throw new DirectoryNotFoundException("Could not determine application directory.");
+            string[] staticNames = new string[]
+            {
+                "default.cur", "help.cur", "crosshair.cur", "text.cur", "pencil.cur", "not-allowed.cur",
+                "size_ver.cur", "size_hor.cur", "size_fdiag.cur", "size_bdiag.cur", "fleur.cur",
+                "up-arrow.cur", "pointer.cur"
+            };
+            string[] animatedNames = new string[] { "progress.ani", "wait.ani" };
 
-            string staticDir   = Path.Combine(exeDir, "cursors", cursorDirName, "static");
-            string animatedDir = Path.Combine(exeDir, "cursors", cursorDirName, "animated");
-
-            Log("Install: exeDir=" + exeDir + " staticDir=" + staticDir + " animatedDir=" + animatedDir);
-            Log("Install: staticDir exists=" + Directory.Exists(staticDir) + " animatedDir exists=" + Directory.Exists(animatedDir));
-
-            if (!Directory.Exists(staticDir))
-                throw new DirectoryNotFoundException("Cursor files not found in 'cursors/" + cursorDirName + "/static/'.");
-
+            Log("Install: variant=" + cursorDirName + " installDir=" + installDir);
             Directory.CreateDirectory(installDir);
             Log("Install: created/verified installDir=" + installDir);
 
-            foreach (var file in Directory.EnumerateFiles(staticDir, "*.cur"))
+            string prefix = "NumixCursors.cursors." + cursorDirName + ".";
+            foreach (var name in staticNames)
             {
-                File.Copy(file, Path.Combine(installDir, Path.GetFileName(file)), true);
-                Log("Install: copied " + Path.GetFileName(file) + " -> " + installDir);
+                WriteEmbeddedCursor(prefix + "static." + name, Path.Combine(installDir, name));
+                Log("Install: extracted " + name + " -> " + installDir);
             }
-
-            if (Directory.Exists(animatedDir))
+            foreach (var name in animatedNames)
             {
-                foreach (var file in Directory.EnumerateFiles(animatedDir, "*.ani"))
-                {
-                    File.Copy(file, Path.Combine(installDir, Path.GetFileName(file)), true);
-                    Log("Install: copied " + Path.GetFileName(file) + " -> " + installDir);
-                }
+                WriteEmbeddedCursor(prefix + "animated." + name, Path.Combine(installDir, name));
+                Log("Install: extracted " + name + " -> " + installDir);
             }
 
             foreach (var f in Directory.EnumerateFiles(installDir))
@@ -395,6 +389,17 @@ namespace NumixCursorsManager
 
             if (setActive) SetActiveCursor(installDir);
             Log("Install: completed");
+        }
+
+        private void WriteEmbeddedCursor(string resourceName, string destPath)
+        {
+            using (var stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                    throw new DirectoryNotFoundException("Embedded cursor resource missing: " + resourceName + ". Re-download the exe.");
+                using (var file = new FileStream(destPath, FileMode.Create, FileAccess.Write))
+                    stream.CopyTo(file);
+            }
         }
 
         private void Uninstall(string installDir, string schemeName)
