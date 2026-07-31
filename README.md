@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.1.3)
+# NumixCursorTheme-WindowsInstaller (v1.2)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.1.3-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.2-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -16,8 +16,11 @@ The original repository provides Linux-first tooling and requires additional dep
 
 ## What's included
 
-* **13 static cursor files** (`.cur`) covering the full Numix Dark cursor set for Windows
-* **2 animated cursor files** (`.ani`) for busy and working states
+* **Two cursor variants**, each covering the full Numix cursor set for Windows:
+  * **Numix Cursor Dark** — white cursors for dark backgrounds
+  * **Numix Cursor Light** — dark cursors for light backgrounds
+* **13 static cursor files** (`.cur`) per variant
+* **2 animated cursor files** (`.ani`) per variant for busy and working states
 * **`NumixCursorsManager.exe`** — a native Windows application with GUI that handles installation, uninstallation, and cursor management
 * **`logo.ico`** — custom app icon (stored in `assets/`)
 * **Source code** — C# source files (`Program.cs`, `MainForm.cs`) for transparency and customization
@@ -40,9 +43,10 @@ The original repository provides Linux-first tooling and requires additional dep
 1. Download the latest release ZIP from the [Releases](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases) page
 2. Extract the ZIP file (ensure `NumixCursorsManager.exe` is in the same folder as the `cursors/` directory)
 3. Right-click `NumixCursorsManager.exe` → **Run as administrator**
-4. Select **"Install Numix Dark"**
-5. (Optional) Check **"Set as active cursor immediately"** to apply the theme right away
-6. Click **Apply**
+4. Select your preferred **cursor variant**: **Numix Cursor Dark** (for dark backgrounds) or **Numix Cursor Light** (for light backgrounds)
+5. Select **"Install"**
+6. (Optional) Check **"Set as active cursor immediately"** to apply the theme right away
+7. Click **Apply**
 
 ### Build from Source
 
@@ -65,11 +69,11 @@ The original repository provides Linux-first tooling and requires additional dep
 
 ## Usage
 
-The **Numix Cursors Manager** provides a simple interface with four options:
+The **Numix Cursors Manager** lets you pick a **Cursor Variant** (Dark or Light) and then perform one of four actions:
 
-* **Install Numix Dark** — Copies static and animated cursor files to the system directory and registers the theme.
-* **Set Numix Dark (Activate Theme)** — Activates the theme if already installed, without reinstalling.
-* **Uninstall Numix Dark** — Removes the theme and all cursor files. Automatically restores the Windows default cursor if Numix is currently active.
+* **Install** — Copies static and animated cursor files to the system directory and registers the theme.
+* **Set Active** — Activates the theme if already installed, without reinstalling.
+* **Uninstall** — Removes the theme and all cursor files. Automatically restores the Windows default cursor if the theme is currently active.
 * **Restore Windows Default** — Resets the cursor theme to Windows default. Skips the operation if the default is already active.
 
 **Options:**
@@ -95,17 +99,21 @@ The **Numix Cursors Manager** provides a simple interface with four options:
 NumixCursorTheme-WindowsInstaller/
 ├── src/
 │   ├── cursors/
-│   │   ├── static/        # Static cursor files (.cur)
-│   │   └── animated/      # Animated cursor files (.ani)
-│   ├── Program.cs         # Application entry point
-│   ├── MainForm.cs        # Main application logic and GUI
-│   └── app.manifest       # UAC manifest (requires administrator)
+│   │   ├── dark/              # Numix Cursor Dark (white cursors)
+│   │   │   ├── static/        # Static cursor files (.cur)
+│   │   │   └── animated/      # Animated cursor files (.ani)
+│   │   └── light/             # Numix Cursor Light (dark cursors)
+│   │       ├── static/        # Static cursor files (.cur)
+│   │       └── animated/      # Animated cursor files (.ani)
+│   ├── Program.cs             # Application entry point
+│   ├── MainForm.cs            # Main application logic and GUI
+│   └── app.manifest           # UAC manifest (requires administrator)
 ├── assets/
-│   ├── logo.png           # Project logo
-│   ├── logo.ico           # App icon — exe, taskbar, and form title bar
-│   ├── preview.png        # Preview image for the README
-│   ├── preview2.png       # App interface screenshot
-│   └── social_preview.png # Social preview image
+│   ├── logo.png               # Project logo
+│   ├── logo.ico               # App icon — exe, taskbar, and form title bar
+│   ├── preview.png            # Preview image for the README
+│   ├── preview2.png           # App interface screenshot
+│   └── social_preview.png     # Social preview image
 ├── LICENSE
 └── README.md
 ```
@@ -113,6 +121,13 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.2
+* Added **Numix Cursor Light** variant — dark-colored cursors optimized for light backgrounds, selectable via the new **Cursor Variant** selector in the GUI
+* Renamed the original variant to **Numix Cursor Dark** for clarity
+* Regenerated all cursor files in native Windows DIB format (32-bit BGRA + AND mask) — the previous PNG-based `.cur` files and legacy `.ani` files failed to load on some Windows systems, causing `SystemParametersInfo(SPI_SETCURSORS)` to report "cursor files not found". All 26 `.cur` + 4 `.ani` files are now verified to load correctly
+* Fixed cursor activation failing on systems where `SPI_SETCURSORS` returned an error with `SPIF_UPDATEINIFILE` — the installer now persists the registry values itself and activates via `SPIF_SENDCHANGE` only
+* Added `numix-install.log` diagnostic logging (created next to the exe) that records every step: file copies, registry writes, and the result of the activation call
 
 ### v1.1.3
 * Fixed hotspot alignment on 5 cursor files (`default`, `help`, `pencil`, `pointer`, `up-arrow`) — hotspot coordinates were misaligned with the actual tip of each cursor image (fix by [SorenINT2000](https://github.com/SorenINT2000))
@@ -150,7 +165,7 @@ NumixCursorTheme-WindowsInstaller/
 
 All cursor artwork is part of the **Numix cursor theme**, originally created by the [Numix Project](https://github.com/numixproject) and distributed under the GPL-3.0 license.
 
-This installer wrapper is a convenience repackaging for Windows users. Cursor files have been repackaged for Windows compatibility and upscaled to include HiDPI sizes (up to 256×256 px); the visual artwork has not been altered.
+This installer wrapper is a convenience repackaging for Windows users. Cursor files have been repackaged for Windows compatibility in native `.cur`/`.ani` format; the visual artwork has not been altered.
 
 * Original project: <https://github.com/numixproject/numix-cursor-theme>
 * Numix Project: <https://github.com/numixproject>
