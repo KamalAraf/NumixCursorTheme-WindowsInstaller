@@ -418,7 +418,7 @@ namespace NumixCursorsManager
                 if (key == null)
                 {
                     Log("RestoreDefault: FAILED to open registry key " + CURSORS_REG);
-                    return;
+                    throw new Exception("Failed to open registry key: " + CURSORS_REG);
                 }
                 key.SetValue("Arrow",       DefArrow);
                 key.SetValue("Help",        DefHelp);
@@ -444,10 +444,8 @@ namespace NumixCursorsManager
                 throw new Exception(string.Format("Cursor theme was applied to the registry but could not be activated immediately (error {0}). Changes will take effect after restarting Explorer.", lastErr));
         }
 
-        private void SetActiveCursor(string installDir)
+        private string[] EnsureCursorFilesExist(string installDir)
         {
-            Log("SetActiveCursor: installDir=" + installDir);
-
             string[] required = new string[]
             {
                 installDir + @"\default.cur",
@@ -476,12 +474,29 @@ namespace NumixCursorsManager
             }
             Log("SetActiveCursor: all required files exist=" + allExist);
 
+            if (!allExist)
+            {
+                string missing = "";
+                foreach (var path in required)
+                    if (!File.Exists(path)) missing += (missing.Length > 0 ? ", " : "") + Path.GetFileName(path);
+                Log("SetActiveCursor: THROW missing files: " + missing);
+                throw new DirectoryNotFoundException("Cursor files missing, cannot activate theme: " + missing + ". Reinstall the theme.");
+            }
+            return required;
+        }
+
+        private void SetActiveCursor(string installDir)
+        {
+            Log("SetActiveCursor: installDir=" + installDir);
+
+            string[] required = EnsureCursorFilesExist(installDir);
+
             using (var key = Registry.CurrentUser.OpenSubKey(CURSORS_REG, true))
             {
                 if (key == null)
                 {
                     Log("SetActiveCursor: FAILED to open registry key " + CURSORS_REG);
-                    return;
+                    throw new Exception("Failed to open registry key: " + CURSORS_REG);
                 }
                 string[] names = new string[] { "Arrow", "Help", "AppStarting", "Wait", "Crosshair", "IBeam", "NWPen", "No", "SizeNS", "SizeWE", "SizeNWSE", "SizeNESW", "SizeAll", "UpArrow", "Hand" };
                 for (int i = 0; i < names.Length; i++)
@@ -505,7 +520,7 @@ namespace NumixCursorsManager
             {
                 if (key == null) return false;
                 string val = key.GetValue("Arrow") as string;
-                return val != null && val.StartsWith(installDir, StringComparison.OrdinalIgnoreCase);
+                return val != null && val.StartsWith(installDir + "\\", StringComparison.OrdinalIgnoreCase);
             }
         }
     }

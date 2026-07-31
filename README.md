@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.2)
+# NumixCursorTheme-WindowsInstaller (v1.2.1)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.2-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.2.1-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -121,6 +121,11 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.2.1
+* Fixed variant detection when uninstalling — `IsNumixActive` matched `Numix-Cursor-Light` files against the `Numix-Cursor` prefix, so uninstalling the dark variant while the light variant was active could restore the Windows default cursor and wipe the active scheme. The check now matches on the full directory path
+* Fixed missing cursor files being silently ignored on activation — the missing-file check was computed and logged but never enforced, so `SetActiveCursor` proceeded and `SPI_SETCURSORS` failed with an unclear error. It now throws with the list of missing files (and a reinstall hint) before touching the registry
+* Fixed silent failure on unopenable registry key in `SetActiveCursor` and `RestoreDefault` — instead of showing a false "Operation completed successfully", the app now throws an error message
 
 ### v1.2
 * Added **Numix Cursor Light** variant — dark-colored cursors optimized for light backgrounds, selectable via the new **Cursor Variant** selector in the GUI
