@@ -183,7 +183,7 @@ namespace NumixCursorsManager
 
         private string CursorDirName()
         {
-            return SelectedVariant() == 0 ? "dark" : "light";
+            return SelectedVariant() == 0 ? "light" : "dark";
         }
 
         private void InitializeComponent()
@@ -344,7 +344,7 @@ namespace NumixCursorsManager
                 int size = SelectedSize();
 
                 Log("=== Apply clicked: action=" + (rbInstall.Checked ? "Install" : rbUninstall.Checked ? "Uninstall" : rbSetActive.Checked ? "SetActive" : "Restore") +
-                    " variant=" + (rbVariantLight.Checked ? "light" : "dark") +
+                    " variant=" + cursorDir +
                     " size=" + size +
                     " installDir=" + installDir + " schemeName=" + schemeName);
 

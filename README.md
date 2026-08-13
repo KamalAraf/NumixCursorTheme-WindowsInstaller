@@ -1,9 +1,9 @@
-# NumixCursorTheme-WindowsInstaller (v1.2.3)
+# NumixCursorTheme-WindowsInstaller (v1.2.4)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%2F%2011-lightgrey)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller)
-[![Version](https://img.shields.io/badge/version-1.2.3-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
+[![Version](https://img.shields.io/badge/version-1.2.4-orange)](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases)
 
 [![Preview](assets/preview.png)](assets/preview.png)
 
@@ -18,8 +18,8 @@ The original repository provides Linux-first tooling and requires additional dep
 
 * **`NumixCursorsManager.exe`** — fully self-contained: all cursor files are embedded inside the exe, so **no ZIP or extra files are needed** to install the theme
 * **Two cursor variants**, each covering the full Numix cursor set for Windows:
-  * **Numix Cursor Dark** — white cursors for dark backgrounds
-  * **Numix Cursor Light** — dark cursors for light backgrounds
+  * **Numix Cursor Dark** — dark-colored cursors for light backgrounds
+  * **Numix Cursor Light** — white cursors for dark backgrounds
 * **13 static cursor files** (`.cur`) per variant, **2 animated cursor files** (`.ani`) per variant
 * **`logo.ico`** — custom app icon (stored in `assets/`)
 * **Source code** — C# source files (`Program.cs`, `MainForm.cs`), build script (`build.bat`), and cursor sources (`src/cursors/`)
@@ -41,7 +41,7 @@ The original repository provides Linux-first tooling and requires additional dep
 
 1. Download `NumixCursorsManager.exe` from the [Releases](https://github.com/KamalAraf/NumixCursorTheme-WindowsInstaller/releases) page
 2. Double-click `NumixCursorsManager.exe` — UAC elevation is automatic
-3. Select your preferred **cursor variant**: **Numix Cursor Dark** (for dark backgrounds) or **Numix Cursor Light** (for light backgrounds)
+3. Select your preferred **cursor variant**: **Numix Cursor Dark** (dark-colored, for light backgrounds) or **Numix Cursor Light** (white, for dark backgrounds)
 4. Select **"Install"**
 5. (Optional) Check **"Set as active cursor immediately"** to apply the theme right away
 6. Click **Apply**
@@ -113,6 +113,9 @@ NumixCursorTheme-WindowsInstaller/
 ---
 
 ## Changelog
+
+### v1.2.4
+* Fixed variant naming to match the cursor color — **Numix Cursor Dark** now installs the dark-colored cursors (optimized for light backgrounds) and **Numix Cursor Light** the white cursors (for dark backgrounds). Previously the names referred to the background the cursors were designed for, which was confusing. Registry scheme names are unchanged, so existing installations remain compatible.
 
 ### v1.2.3
 * Added dynamic cursor resizing — choose any pointer size (32-256px) using a new slider in the GUI. The app now generates scaled cursor files on the fly during installation using a high-quality Lanczos resampling algorithm.
