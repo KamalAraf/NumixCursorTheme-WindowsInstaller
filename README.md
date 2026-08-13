@@ -1,4 +1,4 @@
-# NumixCursorTheme-WindowsInstaller (v1.2.2)
+# NumixCursorTheme-WindowsInstaller (v1.2.3)
 
 [![License: Wrapper](https://img.shields.io/badge/license-Wrapper%20License-blue)](./LICENSE)
 [![License: Cursors](https://img.shields.io/badge/license-GPL--3.0-green)](https://www.gnu.org/licenses/gpl-3.0.html)
@@ -67,7 +67,7 @@ The **Numix Cursors Manager** lets you pick a **Cursor Variant** (Dark or Light)
 * **Restore Windows Default** — Resets the cursor theme to Windows default. Skips the operation if the default is already active.
 
 **Options:**
-* **Pointer Size** (slider) — *Available during installation only.* Adjusts the size of the installed cursors (32px to 240px). The app dynamically generates cursor files to match the selected size. **Note: Cursors may appear blurry above 96px; this is a known issue.**
+* **Pointer Size** (slider) — *Available during installation only.* Adjusts the size of the installed cursors (32px to 256px). The app dynamically generates cursor files to match the selected size. **Note: Cursors may appear blurry above 96px; this is a known issue.**
 * **Set as active cursor immediately** (checkbox) — *Available during installation only.* When checked, applies the theme instantly after copying files. Uncheck to install without changing the active cursor.
 
 ---
@@ -115,7 +115,7 @@ NumixCursorTheme-WindowsInstaller/
 ## Changelog
 
 ### v1.2.3
-* Added dynamic cursor resizing — choose any pointer size (32-240px) using a new slider in the GUI. The app now generates scaled cursor files on the fly during installation using a high-quality Lanczos resampling algorithm.
+* Added dynamic cursor resizing — choose any pointer size (32-256px) using a new slider in the GUI. The app now generates scaled cursor files on the fly during installation using a high-quality Lanczos resampling algorithm.
 * Integrated with Windows system cursor size settings to apply and restore user preferences.
 
 ### v1.2.2
